@@ -1,0 +1,17 @@
+body {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgrey;
+}
+
+.mainBox{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  justify-content: center;
+  align-items: center;
+  background-color: gainsboro;
+  box-shadow : 2px 2px 5px #394a63;
+  padding:10px;
+}
