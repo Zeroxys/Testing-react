@@ -8,16 +8,33 @@ class App extends Component {
     
     this.state = {
       text : '',
-      showChart : false
+      charts : [],
+      showChart : true
     }
 
   }
   
-  onChange = (e, stringDiv) => {
+  onChange = (e) => {
     const textInput = e.target.value
+    const text = this.state.text.slice()
+
+    const arrayText = text.split()
+
+    const list = [{...arrayText}]
+
+    console.log(list)
 
     this.setState({
-      text: textInput
+      text: textInput,
+      charts : arrayText
+    })
+  }
+
+  onDelete = (i) => {
+    const letters = this.state.charts.slice()
+    
+    letters.findIndex( (letter) => {
+      return letter.id === i
     })
   }
 
@@ -27,8 +44,16 @@ class App extends Component {
     
     if(this.state.showChart){
       letter = (
-        <ChartComponent
-          letter = 'a'/>
+        <div>
+          {this.state.charts.map( (chart, i) => {
+            return (
+              <ChartComponent
+                key={i}
+                letter={chart}
+                delete={() => this.onDelete(i)}/>
+            )
+          })}
+        </div>
       )
     }
 
