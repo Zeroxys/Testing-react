@@ -8,21 +8,16 @@ class App extends Component {
     
     this.state = {
       text : '',
-      charts : [],
+      charts : null,
       showChart : true
     }
 
   }
   
-  onChange = (e) => {
+  onInput = (e) => {
     const textInput = e.target.value
-    const text = this.state.text.slice()
 
-    const arrayText = text.split()
-
-    const list = [{...arrayText}]
-
-    console.log(list)
+    const arrayText = textInput.split('')
 
     this.setState({
       text: textInput,
@@ -30,27 +25,27 @@ class App extends Component {
     })
   }
 
-  onDelete = (i) => {
-    const letters = this.state.charts.slice()
-    
-    letters.findIndex( (letter) => {
-      return letter.id === i
+  onDelete = (e, chartIndex) => {
+    const Index = this.state.charts.findIndex( (i) => {
+      return i[i] === chartIndex
     })
+
+    console.log(Index)
   }
 
   render() {
 
     let letter = null
     
-    if(this.state.showChart){
+    if(this.state.showChart && this.state.charts){
       letter = (
         <div>
-          {this.state.charts.map( (chart, i) => {
+          {this.state.charts.map( (chart, chartIndex) => {
             return (
               <ChartComponent
-                key={i}
+                key={chartIndex}
                 letter={chart}
-                delete={() => this.onDelete(i)}/>
+                delete={(e) => this.onDelete(e, chartIndex)}/>
             )
           })}
         </div>
@@ -61,10 +56,9 @@ class App extends Component {
       <div>
         <Validation
           size={this.state.text.length}
-          change={(e) => this.onChange(e)}
+          change={(e) => this.onInput(e)}
           text={this.state.text}/>  
-
-          {letter}
+          <div className="chartsContent"> {letter} </div>
       </div>
     )
   }

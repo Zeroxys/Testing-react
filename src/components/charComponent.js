@@ -8,7 +8,6 @@ const styles = {
   marginRight:10,
   boxShadow: '2px 2px 5px #394a63',
   textAlign: 'center',
-  flexWrap: 'nowrap'
 }
 
 const CharComponent = (props) => {

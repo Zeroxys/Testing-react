@@ -8,10 +8,17 @@ body {
 .mainBox{
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 520px;
   justify-content: center;
   align-items: center;
   background-color: gainsboro;
   box-shadow : 2px 2px 5px #394a63;
   padding:10px;
+}
+
+.chartsContent {
+  display: flex;
+  align-items: center;
+  width : 560px;
+  flex-wrap: wrap;
 }
