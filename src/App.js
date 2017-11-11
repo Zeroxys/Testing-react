@@ -1,67 +1,51 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import './index.css'
 import Validation from './components/validation'
 import ChartComponent from './components/charComponent'
-
-class App extends Component {
-  constructor () {
+export default class App extends Component {
+  constructor (props) {
     super()
-    
     this.state = {
-      text : '',
-      charts : null,
-      showChart : true
+      text : ''
     }
-
   }
   
-  onInput = (e) => {
-    const textInput = e.target.value
-
-    const arrayText = textInput.split('')
-
-    this.setState({
-      text: textInput,
-      charts : arrayText
-    })
+  onChanged = (e) => {
+    let text = e.target.value
+    this.setState({text})
   }
 
-  onDelete = (e, chartIndex) => {
-    const Index = this.state.charts.findIndex( (i) => {
-      return i[i] === chartIndex
-    })
-
-    console.log(Index)
+  onDelete = (i) => {
+    const textDate = this.state.text.slice()
+    let newData  = textDate.split('')
+    newData.splice(i, 1)
+    let textUpdate  = newData.join('')
+  
+    this.setState({ text : textUpdate})
   }
 
-  render() {
+  render () {
 
-    let letter = null
-    
-    if(this.state.showChart && this.state.charts){
-      letter = (
-        <div>
-          {this.state.charts.map( (chart, chartIndex) => {
-            return (
-              <ChartComponent
-                key={chartIndex}
-                letter={chart}
-                delete={(e) => this.onDelete(e, chartIndex)}/>
-            )
-          })}
-        </div>
-      )
-    }
+    let chartList = null
+
+    chartList = this.state.text.split('').map( (el, i) => {
+      return (<ChartComponent 
+        key={i} chart={el} click = {() => this.onDelete(i)}/>
+        )
+    })
 
     return (
       <div>
-        <Validation
-          size={this.state.text.length}
-          change={(e) => this.onInput(e)}
-          text={this.state.text}/>  
-          <div className="chartsContent"> {letter} </div>
+        <div className="mainBox">
+          <h1>Testing</h1>
+          <Validation
+            changed={(e) => this.onChanged(e)}
+            text = {this.state.text}/>
+        </div>
+        <div className="chartsContent">
+          {chartList}
+        </div>
       </div>
     )
   }
 }
-
-export default App

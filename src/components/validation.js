@@ -1,10 +1,18 @@
 import React from 'react'
 
 const Validation = (props) => {
+
+  let textValidation = 'text enough long'
+  if(props.text.length <= 5) {
+    textValidation = 'text too short'
+  }
+
   return (
-    <div className="mainBox">
-      <h1>Validation Test</h1>
-      <span><input type="text" onChange={props.change} value={props.text}/><p>Text Size : {props.size} {props.size > 5 ? 'Text enought': 'Text too short'}</p></span>
+    <div>
+      <h1>Validacion</h1>
+      <input type="text" onChange={props.changed}/>
+      <h3>{props.text}</h3>
+      <p>{textValidation}</p>
     </div>
   )
 }

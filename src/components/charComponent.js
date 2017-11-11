@@ -1,21 +1,25 @@
 import React from 'react'
 
 const styles = {
-  display: 'inline-block',
-  padding: 10,
-  width:80,
-  marginTop: 10,
-  marginRight:10,
-  boxShadow: '2px 2px 5px #394a63',
-  textAlign: 'center',
+  container : {
+    display:'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: 100,
+    marginTop: 10,
+    marginLeft: 10,
+    backgroundColor: 'gainsboro',
+    boxShadow : '2px 2px 5px #394a63',
+  }
 }
 
-const CharComponent = (props) => {
+const ChartComponent = (props) => {
   return (
-    <div style={styles} onClick={props.delete}>
-      <h2>{props.letter}</h2>
+    <div style={styles.container} onClick={props.click}>
+      <p>{props.chart}</p>
     </div>
   )
 }
 
-export default CharComponent
+export default ChartComponent
